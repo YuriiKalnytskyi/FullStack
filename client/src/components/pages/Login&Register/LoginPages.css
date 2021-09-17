@@ -1,0 +1,30 @@
+.login_container{
+    background: bisque;
+    width: 400px;
+    height: 400px;
+}
+.login_content{
+}
+.input_container{
+    height: 70px;
+    background: red;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+
+}
+.labelClass{
+    width: 100%;
+}
+.inputClass{
+    width: 350px;
+    height: 30px;
+}
+.position{
+    position: relative;
+
+}
+.icon{
+position: absolute;
+    top: 10px;
+    right: 25px;
+}
