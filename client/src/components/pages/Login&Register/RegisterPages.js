@@ -25,7 +25,12 @@ export const RegisterPages = () => {
     }
 
     const registerHandler = async () => {
-        let a = await register(form)
+        const formData = new FormData();
+        for (const key in form) {
+            formData.append(key,form[key])
+        }
+
+        let a = await register(formData)
         if (!a) {
             console.log(Error)
             alert(JSON.stringify(Error))
