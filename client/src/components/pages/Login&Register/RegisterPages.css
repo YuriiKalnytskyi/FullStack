@@ -1,7 +1,70 @@
-.register_container{
-    background: aquamarine;
+.register_container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50%;
+}
+
+.Q {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.78);
+    color: white;
+    border-radius: 15px;
+}
+
+.register_input_container {
+    width: 370px;
+    height: 60px;
+    flex-wrap: wrap;
+    margin-bottom: 7px;
+}
+
+.labelClass {
+    width: 300px;
+}
+
+.A {
+    width: 370px;
+    height: 50px;
+    display: flex;
+    margin: 0 0 7px 10px;
+}
+
+.ageClass {
+    width: 50%;
+}
+
+.inputClass {
+    width: 350px;
+    height: 30px;
+}
+
+.inputClass2 {
+    width: 170px;
+    height: 20px;
+    border-radius: 7px;
+}
+.ageInput{
+    width: 170px;
+    border-radius: 7px;
+    height: 15px;
+}
+.ageInput2{
+    width: 175px;
+    border-radius: 7px;
+    height: 22px;
+}
+
+.position {
+    position: relative;
+}
+
+.icon2 {
+    position: absolute;
+    top: 5px;
+    right: 25px;
 }

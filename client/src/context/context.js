@@ -6,5 +6,7 @@ export const Context = createContext({
     token: null,
     userId: null,
     login: noop,
-    isAuthenticated: false
+    logout:noop,
+    isAuthenticated: false,
+    ready: false
 })

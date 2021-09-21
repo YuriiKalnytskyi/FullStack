@@ -18,30 +18,20 @@ export const LoginPages = () => {
     }
 
     const loginHandler = async () => {
-        // let a = await login1(form)
-        // if (!a) {
-        //     console.log(Error)
-        //     alert(JSON.stringify(Error.message))
-        // }
-        //
-        // localStorage.setItem('accessToken', a.accessToken)
-        // localStorage.setItem('refreshToken', a.refreshToken)
-        // localStorage.setItem('user', JSON.stringify(a))
-
         const data = await login1(form)
         console.log(data)
         if (data) {
             auth.login({ accessToken: data.accessToken, refreshToken: data.refreshToken }, data.userId)
         }
-
     }
 
 
     return (
         <div className={'login_container'}>
+
             <div className="col s6 offset-s3">
                     <div className="card-content white-text">
-                        <span className="card-title">Логінація</span>
+                        <div className="card-title">Логінація</div>
 
                         <div className={"login_content"}>
                             <div className="input_container">
@@ -64,12 +54,13 @@ export const LoginPages = () => {
                                            type={pass ? "text" : "password"}
                                     />
                                     <div className={"icon"}>
-                                        {pass ? <VisibilityIcon onClick={() => {
+                                        {pass ? <VisibilityIcon style={{color: "black"}} onClick={() => {
                                                 setPass(!pass)
                                             }}/>
-                                            : <VisibilityOffIcon onClick={() => {
+                                            : <VisibilityOffIcon style={{color: "black"}} onClick={() => {
                                                 setPass(!pass)
-                                            }}/>}
+                                            }}/>
+                                        }
                                     </div>
                                 </div>
 
@@ -79,14 +70,14 @@ export const LoginPages = () => {
                     </div>
 
                     <div className="card-action">
-                        <Link to={'/'} style={{ marginRight: 10 }}>
+                        <Link to={'/register'} style={{ marginRight: 10 }}>
                             <button className="btn grey lighten-1 black-text "> Реєстрація</button>
                         </Link>
 
                         <button className="btn yellow darken-4" onClick={loginHandler}>Ввійти</button>
                     </div>
 
-                </div>
+            </div>
 
         </div>
     )

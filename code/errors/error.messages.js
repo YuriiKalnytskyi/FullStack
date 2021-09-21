@@ -10,14 +10,22 @@ module.exports = {
   },
   USER_EMAIL_PASSWORD: {
     message: 'login or password is incorrect',
-    code: '400.6'
+    code: '4006'
+  },
+  FILE_TOO_BIG: {
+    customCode: '4005',
+    message: 'File is too big'
+  },
+  AVATAR: {
+    message: 'Just one avatar per user',
+    code: '4090'
   },
   USER_EMAIL: {
     message: 'user is login',
-    code: '400.1'
+    code: '4001'
   },
   USER_NOT_FOUND: {
     message: 'User not found',
-    code: '404.0'
+    code: '4040'
   },
 };

@@ -1,15 +1,28 @@
 const { USER, OAuth } = require('../dataBase');
 const { statusCode } = require('../errors');
 const { passwordHesher, authHelpers } = require('../helpers');
+const { fileUploadService } = require('../services');
 
 module.exports = {
   register: async (req, res, next) => {
     try {
-      const { user: { email, password } } = req;
+      const { user: { password, } } = req;
+      const avatarPhotos = req.avatar;
 
       const hashedPassword = await passwordHesher.hash(password);
 
-      const user = await USER.create({ email, password: hashedPassword });
+      if (avatarPhotos) {
+        const a = await fileUploadService.uploadFile(avatarPhotos);
+        req.body = {
+          ...req.body,
+          avatar: a.url
+        };
+      }
+
+      const user = await USER.create({
+        ...req.body,
+        password: hashedPassword,
+      });
 
       res.status(statusCode.CREATED).json({
         httpCode: 201,

@@ -2,163 +2,172 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import "./RegisterPages.css"
 import {register} from '../../../services/users.service'
+import "./RegisterPages.css"
 
 
 export const RegisterPages = () => {
-    // const { register , Error } = useHttp1()
     const [pass, setPass] = useState(false);
+    const [avatar, setAvatar] = useState({ avatar: '' });
+
     const [form, setForm] = useState({
-        avatar: '',
         name: '',
         firstname: '',
         age: '',
         gender: '',
         email: '',
-        password: ''
+        password: '',
+        phone: ''
     })
 
-    // console.log(Error)
+    const changeHandlerFile = e => {
+        setAvatar({ ...form, [e.target.name]: e.target.files[0] })
+    }
     const changeHandler = e => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
     const registerHandler = async () => {
-        const formData = new FormData();
-        for (const key in form) {
-            formData.append(key,form[key])
+        const formData = new FormData()
+        formData.append("avatar", avatar.avatar)
+        formData.append("name", form.name)
+        formData.append("firstname", form.firstname)
+        formData.append("age", form.age)
+        formData.append("gender", form.gender)
+        formData.append("email", form.email)
+        formData.append("password", form.password)
+        formData.append("phone", form.phone)
+
+        for (let value of formData.values()) {
+            console.log(value);
         }
 
         let a = await register(formData)
-        if (!a) {
-            console.log(Error)
-            alert(JSON.stringify(Error))
-
-        }
+        console.log(a)
     }
 
-    console.log(form)
     return (
         <div className="register_container">
-            <div className="col s6 offset-s3 container">
-                <div className="card blue-grey darken-1">
-                    <div className="card-content white-text">
-                        <span className="card-title">Реєстрація</span>
-                        <div>
 
-                            <label htmlFor="first_name">Avatars</label>
-                            <div className="input-field ">
-                                <input
-                                    // placeholder="+380(__) ___ __ __"
-                                    id="file"
-                                    type="file"
-                                    name="file"
-                                    onChange={changeHandler}
+            <div className="Q" >
+                <span className="card-title">Реєстрація</span>
+
+                <div>
+                        <label className='labelClass'>Avatars</label>
+                        <div className="input-field ">
+                            <input className="inputClass"
+                                   id="file"
+                                   type="file"
+                                   name="avatar"
+                                   onChange={changeHandlerFile}
+                            />
+                        </div>
+
+                        <div className='A'>
+                            <div className="ageClass ">
+                                <label className='labelClass'>Name</label>
+                                <input className="inputClass2"
+                                       id="name"
+                                       type="text"
+                                       name="name"
+                                       onChange={changeHandler}
                                 />
                             </div>
 
-                            <div className="input-field ">
-                                <input
-                                    // placeholder="email@gmail.com"
-                                    id="name"
-                                    type="text"
-                                    name="name"
-                                    onChange={changeHandler}
+                            <div className="ageClass ">
+                                <label className='labelClass'>Firstname</label>
+                                <input className="inputClass2"
+                                       id="firstname"
+                                       type="text"
+                                       name="firstname"
+                                       onChange={changeHandler}
                                 />
-                                <label htmlFor="first_name">Name</label>
+                            </div>
+                        </div>
+
+
+                        <div className='A'>
+                            <div className='ageClass'>
+                                <label className='labelClass'>Age</label>
+                                <div>
+                                    <input className={'ageInput'}
+                                        id="age"
+                                        type="number"
+                                        name="age"
+                                        onChange={changeHandler}
+                                    />
+                                </div>
+
                             </div>
 
-                            <div className="input-field ">
-                                <input
-                                    // placeholder="email@gmail.com"
-                                    id="firstname"
-                                    type="text"
-                                    name="firstname"
-                                    onChange={changeHandler}
-                                />
-                                <label htmlFor="first_name">Firstname</label>
-                            </div>
-
-                            <div className="input-field ">
-                                <input
-                                    // placeholder="email@gmail.com"
-                                    id="age"
-                                    type="number"
-                                    name="age"
-                                    onChange={changeHandler}
-                                />
-                                <label htmlFor="first_name">Age</label>
-                            </div>
-
-                            <div className="input-field col s12">
-                                <select>
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="1" >man</option>
-                                    <option value="2">woman</option>
+                            <div className='ageClass'>
+                                <label className='labelClass'>Gender</label>
+                                <select className={'ageInput2'} name="gender" onChange={changeHandler}>
+                                    <option defaultValue value="a" disabled selected>Choose your option</option>
+                                    <option value="man">man</option>
+                                    <option value="woman">woman</option>
+                                    <option value="other">other</option>
                                 </select>
-                                <label>Materialize Select</label>
                             </div>
+                        </div>
 
-                            <div className="input-field ">
-                                <input
-                                    placeholder="email@gmail.com"
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    onChange={changeHandler}
-                                />
-                                <label htmlFor="first_name">Email</label>
-                            </div>
+                        <div className="register_input_container ">
+                            <label className='labelClass'>Email</label>
 
-                            <div className="clasInput input-field ">
-                                <input
-                                    // placeholder="password"
-                                    id="password"
-                                    name='password'
-                                    onChange={changeHandler}
-                                    type={pass ? "text" : "password"}
+                            <input className="inputClass"
+                                   placeholder="email@gmail.com"
+                                   id="email"
+                                   type="email"
+                                   name="email"
+                                   onChange={changeHandler}
+                            />
+                        </div>
+
+                        <div className="register_input_container ">
+                            <div className='labelClass'><label>Password</label></div>
+                            <div className='position'>
+                                <input className="inputClass" placeholder="password"
+                                       id="password"
+                                       name='password'
+                                       onChange={changeHandler}
+                                       type={pass ? "text" : "password"}
                                 />
-                                <div className={"icon"}>
-                                    {pass ? <VisibilityIcon onClick={() => {
+                                <div className={"icon2"}>
+                                    {pass ? <VisibilityIcon style={{color: "black"}}  onClick={() => {
                                             setPass(!pass)
                                         }}/>
-                                        : <VisibilityOffIcon onClick={() => {
+                                        : <VisibilityOffIcon style={{color: "black"}} onClick={() => {
                                             setPass(!pass)
                                         }}/>}
                                 </div>
-
-                                <label htmlFor="first_name">password</label>
                             </div>
-                            <div className="input-field ">
-                                <input placeholder="+380(__) ___ __ __"
-                                       id="phone"
-                                       type="number"
-                                       name="phone"
-                                       onChange={changeHandler}
-                                />
-                                <label htmlFor="first_name">Phone</label>
-                            </div>
-
-
                         </div>
 
-                    </div>
+                        <div className="register_input_container ">
+                            <label className='labelClass'>Phone</label>
+                            <input className="inputClass"
+                                   placeholder="+380(__) ___ __ __"
+                                   id="phone"
+                                   type="number"
+                                   name="phone"
+                                   onChange={changeHandler}
+                            />
+                        </div>
 
-                    <div className="card-action">
 
+                </div>
 
-                        <button className="btn grey lighten-1 black-text " style={{ marginRight: 10 }}
-                                onClick={registerHandler}
-                            // disabled={loading}
-                        > Реєстрація
-                        </button>
+                <div className="card-action">
+                    <button className="btn grey lighten-1 black-text " style={{ marginRight: 10 }}
+                            onClick={registerHandler}
+                        // disabled={loading}
+                    > Реєстрація
+                    </button>
 
-                        <Link to={'/login'}>
-                            <button className="btn yellow darken-4"> Ввійти</button>
-                        </Link>
+                    <Link to={'/login'}>
+                        <button className="btn yellow darken-4"> Ввійти</button>
+                    </Link>
 
-                    </div>
                 </div>
             </div>
 
