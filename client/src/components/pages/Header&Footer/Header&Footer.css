@@ -16,3 +16,8 @@
     font-weight: bold;
     font-size: 13px;
 }
+.Footer{
+    width: 100%;
+    height: 100px;
+    background: black;
+}

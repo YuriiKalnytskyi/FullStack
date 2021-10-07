@@ -6,6 +6,7 @@ module.exports = {
   registerMiddleware: async (req, res, next) => {
     try {
       const { email } = req.body;
+      console.log(req.body);
 
       const user = await USER.findOne({ email });
 
@@ -46,6 +47,17 @@ module.exports = {
       next();
     } catch (e) {
       console.log(e);
+      next(e);
+    }
+  },
+
+  updateMiddleware: async (req, res, next) => {
+    try {
+      const { user, body } = req;
+      console.log(user);
+      console.log(body);
+    } catch (e) {
+      console.log('error', e);
       next(e);
     }
   }

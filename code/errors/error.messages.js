@@ -8,6 +8,18 @@ module.exports = {
     message: 'Route not fond',
     code: '404'
   },
+  NO_TOKEN: {
+    message: 'No token',
+    code: '401.0'
+  },
+  WRONG_TOKEN: {
+    message: 'Wrong token',
+    code: '401.1'
+  },
+  RECORD_NOT_FOUND: {
+    message: 'Record not found',
+    code: '404.0'
+  },
   USER_EMAIL_PASSWORD: {
     message: 'login or password is incorrect',
     code: '4006'

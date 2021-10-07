@@ -34,17 +34,14 @@ module.exports = {
     email: Joi.string()
       .regex(EMAIl)
       .required(),
-
     password: Joi.string()
       .required()
       .regex(PASSWORD)
   }),
   login: Joi.object({
-
     email: Joi.string()
       .regex(EMAIl)
       .required(),
-
     password: Joi.string()
       .required()
       .regex(PASSWORD)

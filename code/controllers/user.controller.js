@@ -18,7 +18,6 @@ module.exports = {
           avatar: a.url
         };
       }
-
       const user = await USER.create({
         ...req.body,
         password: hashedPassword,
@@ -30,7 +29,7 @@ module.exports = {
         user,
       });
     } catch (e) {
-      // res.status().json({ message: 'Щось пішло не так ' });
+      console.log('--------------', e);
       next(e);
     }
   },
@@ -40,13 +39,49 @@ module.exports = {
 
       await passwordHesher.compare(password, user.password);
 
+      await OAuth.deleteOne({ user: user._id });
+
       const tokenPair = authHelpers.generateTokenPair();
 
       await OAuth.create({ ...tokenPair, user: req.user });
 
-      res.json({ ...tokenPair, userId: user._id });
+      res.json({ ...tokenPair, userId: user._id, user });
     } catch (e) {
       next(e);
     }
   },
+  refreshToken: async (req, res, next) => {
+    try {
+      const { user, refresh_token } = req;
+      console.log(user);
+      console.log(refresh_token);
+      await OAuth.deleteOne({ refresh_token });
+
+      const tokenPair = authHelpers.generateTokenPair();
+
+      await OAuth.create({ ...tokenPair, user });
+      res.json({ ...tokenPair, user });
+    } catch (e) {
+      next(e);
+    }
+  },
+  logout: async (req, res, next) => {
+    try {
+      const { access_token } = req;
+      await OAuth.deleteOne({ refreshToken: access_token });
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  getUserByID: (req, res, next) => {
+    try {
+      const { user } = req;
+      // console.log('++++++', user);
+      res.json(user);
+    } catch (e) {
+      next(e);
+    }
+  }
+
 };

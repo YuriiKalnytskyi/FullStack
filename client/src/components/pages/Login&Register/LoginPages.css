@@ -1,3 +1,8 @@
+@media (min-width: 680px ), screen and (max-width:1000px) {
+    .login_container{
+
+    }
+}
 .login_container{
     background: rgba(0, 0, 0, 0.78);
     color: white;

@@ -8,7 +8,6 @@ import "./LoginPages.css"
 
 export const LoginPages = () => {
     const auth = useContext(Context)
-
     // const {Error, login } = useHttp1();
     const [pass, setPass] = useState(false);
     const [form, setForm] = useState({ email: '', password: '' })
@@ -19,12 +18,11 @@ export const LoginPages = () => {
 
     const loginHandler = async () => {
         const data = await login1(form)
-        console.log(data)
+        // console.log(data)
         if (data) {
-            auth.login({ accessToken: data.accessToken, refreshToken: data.refreshToken }, data.userId)
+            auth.login({ accessToken: data.accessToken, refreshToken: data.refreshToken }, data.userId, data.user)
         }
     }
-
 
     return (
         <div className={'login_container'}>

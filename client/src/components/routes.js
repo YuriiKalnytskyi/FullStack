@@ -6,7 +6,9 @@ import {CreatePages} from "./pages/CreatePages";
 import {RegisterPages} from "./pages/Login&Register/RegisterPages";
 import {LoginPages} from "./pages/Login&Register/LoginPages";
 
+
 export const useRouters = isAuthenticated => {
+
     if (isAuthenticated) {
         return (
             <Switch>
@@ -19,16 +21,19 @@ export const useRouters = isAuthenticated => {
                 <Route path={'/detail/:id'}>
                     <DetailPages/>
                 </Route>
+
+                <Route path={'/update'} exact><RegisterPages name={"update"}/></Route>
+
                 <Redirect to={'/create'}/>
             </Switch>
         )
     }
-    if (!isAuthenticated){
+    if (!isAuthenticated) {
         return (
-                <Switch>
-                    <Route path={'/register'} exact><RegisterPages/></Route>
-                    <Route path={'/login'} exact><LoginPages/></Route>
-                </Switch>
+            <Switch>
+                <Route path={'/register'} exact><RegisterPages name={"Реєстрація"}/></Route>
+                <Route path={'/login'} exact><LoginPages/></Route>
+            </Switch>
         )
     }
 }
